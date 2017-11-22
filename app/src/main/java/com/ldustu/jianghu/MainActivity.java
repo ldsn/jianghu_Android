@@ -1,15 +1,14 @@
 package com.ldustu.jianghu;
 
-import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
-
-
 import android.os.Build;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.webkit.ValueCallback;
 import android.webkit.WebView;
+
+import static cn.jpush.android.api.JPushInterface.init;
+import static cn.jpush.android.api.JPushInterface.setDebugMode;
 
 public class MainActivity extends AppCompatActivity {
     private WebView webView;
@@ -25,6 +24,10 @@ public class MainActivity extends AppCompatActivity {
         wv.setWebView(webView, popView);
 
         webView.loadUrl(getString(R.string.a));
+
+        Log.d("aaaaaaa","bbbbbb");
+        setDebugMode(true);
+        init(getApplicationContext());
     }
 
 

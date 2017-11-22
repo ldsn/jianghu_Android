@@ -17,6 +17,7 @@ public class WV  extends Application {
     public WebView appView;
     public WebView popView;
 
+
     WV() {
     }
 
@@ -56,5 +57,8 @@ public class WV  extends Application {
             instance = new WV();
         }
         return instance;
+    }
+    static void sendMessage(String evt, String arg) {
+
     }
 }

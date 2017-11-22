@@ -24,6 +24,17 @@ public class Bridge extends Object {
     @JavascriptInterface
     public void bridge(String type, String msg) {
         Log.d(type, msg);
+
+        WebView wv = null;
+
+        switch (wvType) {
+            case APP_VIEW:
+                wv = WV.getInstance().appView;
+                break;
+            case POP_VIEW:
+                wv = WV.getInstance().popView;
+                break;
+        }
         switch (type) {
             case "show":
                 show();
@@ -34,13 +45,10 @@ public class Bridge extends Object {
             case "load":
                 load(msg);
                 break;
+            case "back":
+                back(wv);
+                break;
         }
-//        switch (wvType) {
-//            case APP_VIEW:
-//                break;
-//            case POP_VIEW:
-//                break;
-//        }
     }
 
 
@@ -94,6 +102,23 @@ public class Bridge extends Object {
             }
         };
 
+
+        new Thread() {
+            public void run() {
+                handler.post(runnableUi);
+            }
+        }.start();
+    }
+
+    private void back(final WebView wv) {
+
+        // 构建Runnable对象，在runnable中更新界面
+        final Runnable runnableUi = new Runnable(){
+            @Override
+            public void run() {
+                wv.goBack();
+            }
+        };
 
         new Thread() {
             public void run() {
