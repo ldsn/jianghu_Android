@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.fanmingfei.myapplication.MainActivity">
+    tools:context="com.ldustu.jianghu.MainActivity">
+
 
     <WebView
         android:id="@+id/webview"
@@ -28,6 +29,4 @@
         app:layout_constraintTop_toTopOf="parent">
 
     </WebView>
-
-
 </android.support.constraint.ConstraintLayout>

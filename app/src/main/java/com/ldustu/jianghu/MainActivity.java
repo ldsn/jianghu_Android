@@ -1,14 +1,15 @@
-package com.example.fanmingfei.myapplication;
+package com.ldustu.jianghu;
+
+import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
+
 
 import android.os.Build;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.webkit.ValueCallback;
-import android.webkit.WebChromeClient;
-import android.webkit.WebSettings;
 import android.webkit.WebView;
-import android.webkit.WebViewClient;
 
 public class MainActivity extends AppCompatActivity {
     private WebView webView;

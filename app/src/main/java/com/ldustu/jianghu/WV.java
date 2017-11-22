@@ -1,4 +1,4 @@
-package com.example.fanmingfei.myapplication;
+package com.ldustu.jianghu;
 
 import android.annotation.SuppressLint;
 import android.app.Application;
@@ -8,7 +8,7 @@ import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
 /**
- * Created by fanmingfei on 22/11/2017.
+ * Created by jianghu on 22/11/2017.
  */
 
 public class WV  extends Application {

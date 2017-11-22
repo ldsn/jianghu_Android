@@ -1,4 +1,4 @@
-package com.example.fanmingfei.myapplication;
+package com.ldustu.jianghu;
 
 import android.os.Handler;
 import android.util.Log;
@@ -8,7 +8,7 @@ import android.webkit.WebView;
 
 
 /**
- * Created by fanmingfei on 20/11/2017.
+ * Created by jianghu on 20/11/2017.
  */
 
 public class Bridge extends Object {

@@ -1,4 +1,4 @@
-package com.example.fanmingfei.myapplication;
+package com.ldustu.jianghu;
 
 import org.junit.Test;
 
