@@ -5,6 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.webkit.ValueCallback;
+import android.webkit.WebChromeClient;
 import android.webkit.WebView;
 
 import static cn.jpush.android.api.JPushInterface.init;
@@ -21,11 +22,18 @@ public class MainActivity extends AppCompatActivity {
         popView = (WebView) findViewById(R.id.popview);
 
         WV wv = WV.getInstance();
+        wv.setStatus(false);
         wv.setWebView(webView, popView);
 
-        webView.loadUrl(getString(R.string.a));
+        webView.loadUrl(getString(R.string.mainUrl));
 
         Log.d("aaaaaaa","bbbbbb");
+
+        if (webView == WV.getInstance().appView) {
+            Log.d("true","true");
+        }
+
+
         setDebugMode(true);
         init(getApplicationContext());
     }

@@ -1,5 +1,6 @@
 package com.ldustu.jianghu;
 
+import android.app.ActivityManager;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -11,6 +12,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.Iterator;
+import java.util.List;
 
 import cn.jpush.android.api.JPushInterface;
 
@@ -44,13 +46,9 @@ public class MyReceiver extends BroadcastReceiver{
                 String message = bundle.getString(JPushInterface.EXTRA_ALERT);
                 Log.d(TAG, "[MyReceiver] 信息是是：" + message);
 
+                open(context, bundle, message);
 
-                //打开自定义的Activity
-                Intent i = new Intent(context, MainActivity.class);
-                i.putExtras(bundle);
-                //i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP );
-                context.startActivity(i);
+
 
             } else if (JPushInterface.ACTION_RICHPUSH_CALLBACK.equals(intent.getAction())) {
                 Log.d(TAG, "[MyReceiver] 用户收到到RICH PUSH CALLBACK: " + bundle.getString(JPushInterface.EXTRA_EXTRA));
@@ -101,6 +99,34 @@ public class MyReceiver extends BroadcastReceiver{
             }
         }
         return sb.toString();
+    }
+
+    private static void open(Context context, Bundle bundle, String message) {
+//        isBackground(context);
+        WV.getInstance().setStatus(false);
+        //打开自定义的Activity
+        Intent i = new Intent(context, MainActivity.class);
+        i.putExtras(bundle);
+        //i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP );
+        context.startActivity(i);
+        WV.getInstance().sendMessage("message", message);
+    }
+    public static boolean isBackground(Context context) {
+        ActivityManager activityManager = (ActivityManager) context.getSystemService(Context.ACTIVITY_SERVICE);
+        List<ActivityManager.RunningAppProcessInfo> appProcesses = activityManager.getRunningAppProcesses();
+        for (ActivityManager.RunningAppProcessInfo appProcess : appProcesses) {
+            if (appProcess.processName.equals(context.getPackageName())) {
+                if (appProcess.importance == ActivityManager.RunningAppProcessInfo.IMPORTANCE_BACKGROUND) {
+                    Log.i("后台", appProcess.processName);
+                    return true;
+                }else{
+                    Log.i("前台", appProcess.processName);
+                    return false;
+                }
+            }
+        }
+        return false;
     }
 
 }
