@@ -1,9 +1,11 @@
 package com.ldustu.jianghu;
 
+import android.os.Build;
 import android.os.Handler;
 import android.util.Log;
 import android.view.View;
 import android.webkit.JavascriptInterface;
+import android.webkit.ValueCallback;
 import android.webkit.WebView;
 
 
@@ -98,6 +100,16 @@ public class Bridge extends Object {
             @Override
             public void run() {
                 WebView popView = WV.getInstance().popView;
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+                    popView.evaluateJavascript("document && document.body && (document.body.innerHTML = '')", new ValueCallback<String>() {
+                        @Override
+                        public void onReceiveValue(String s) {
+
+                        }
+                    });
+                } else {
+                    popView.loadUrl("document && document.body && (document.body.innerHTML = '')");
+                }
                 popView.loadUrl(msg);
             }
         };

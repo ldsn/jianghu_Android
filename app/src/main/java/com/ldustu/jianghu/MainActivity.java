@@ -27,13 +27,6 @@ public class MainActivity extends AppCompatActivity {
 
         webView.loadUrl(getString(R.string.mainUrl));
 
-        Log.d("aaaaaaa","bbbbbb");
-
-        if (webView == WV.getInstance().appView) {
-            Log.d("true","true");
-        }
-
-
         setDebugMode(true);
         init(getApplicationContext());
     }

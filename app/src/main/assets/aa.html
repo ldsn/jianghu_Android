@@ -9,12 +9,17 @@
 </head>
 <body>
 <a id="bbb">open</a>
+<a id="aaa">close</a>
 <script>
 bbb.addEventListener('click',show);
 function show() {
-   bridge.bridge('load','file:///android_asset/bb.html');
+   __BRIDGE.bridge('load','file:///android_asset/bb.html');
 }
-document.write(navigator.userAgent);
+
+aaa.addEventListener('click', ()=>{
+    __BRIDGE.bridge('load', 'http://jianghu.ldustu.com');
+    __BRIDGE.bridge('show','');
+});
 </script>
 </body>
 </html>

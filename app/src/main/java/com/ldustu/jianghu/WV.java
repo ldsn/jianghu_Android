@@ -7,6 +7,7 @@ import android.os.Build;
 import android.util.Log;
 import android.webkit.ValueCallback;
 import android.webkit.WebChromeClient;
+import android.webkit.WebResourceRequest;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
@@ -47,10 +48,12 @@ public class WV  extends Application {
     private void initWebView () {
         WebSettings appViewSettings = appView.getSettings();
         appViewSettings.setJavaScriptEnabled(true);
+        appViewSettings.setDomStorageEnabled(true);
         appView.addJavascriptInterface(new Bridge(Bridge.WVType.APP_VIEW), "__BRIDGE");//AndroidtoJS类对象映射到js的test对象
 
         WebSettings popViewSettings = popView.getSettings();
         popViewSettings.setJavaScriptEnabled(true);
+        appViewSettings.setDomStorageEnabled(true);
         popView.addJavascriptInterface(new Bridge(Bridge.WVType.POP_VIEW), "__BRIDGE");//AndroidtoJS类对象映射到js的test对象
         initClient();
         resetUA();
@@ -69,10 +72,14 @@ public class WV  extends Application {
                 }
                 super.onPageFinished(view, url);
             }
+
         });
         appView.setWebChromeClient(new WebChromeClient(){
         });
+
+        popView.setWebViewClient(new WebViewClient());
     }
+
 
     private void resetUA () {
         // 修改ua使得web端正确判断
@@ -94,16 +101,6 @@ public class WV  extends Application {
             list.add(arg);
             messageList.add(list);
             return;
-        }
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-            this.appView.evaluateJavascript("window.__receiveJHMessage && window.__receiveJHMessage('"+evt+"','"+arg+"');", new ValueCallback<String>() {
-                @Override
-                public void onReceiveValue(String s) {
-                    Log.d(s,s);
-                }
-            });
-        } else {
-            this.appView.loadUrl("javascript:window.__receiveMessage('"+evt+"','"+arg+"');");
         }
     }
 }
