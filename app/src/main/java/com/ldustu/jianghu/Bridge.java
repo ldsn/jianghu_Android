@@ -101,14 +101,14 @@ public class Bridge extends Object {
             public void run() {
                 WebView popView = WV.getInstance().popView;
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-                    popView.evaluateJavascript("document && document.body && (document.body.innerHTML = '')", new ValueCallback<String>() {
+                    popView.evaluateJavascript("window.document && document.body && (document.body.innerHTML = '')", new ValueCallback<String>() {
                         @Override
                         public void onReceiveValue(String s) {
 
                         }
                     });
                 } else {
-                    popView.loadUrl("document && document.body && (document.body.innerHTML = '')");
+                    popView.loadUrl("window.document && document.body && (document.body.innerHTML = '')");
                 }
                 popView.loadUrl(msg);
             }

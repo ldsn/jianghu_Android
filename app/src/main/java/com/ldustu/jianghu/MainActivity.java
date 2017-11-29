@@ -4,6 +4,7 @@ import android.os.Build;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.webkit.ValueCallback;
 import android.webkit.WebChromeClient;
 import android.webkit.WebView;
@@ -19,13 +20,17 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         webView = (WebView) findViewById(R.id.webview);
-        popView = (WebView) findViewById(R.id.popview);
+
+        WebViewFrame f = (WebViewFrame) findViewById(R.id.webviewFrame);
+        popView = f.mWebview;
+
 
         WV wv = WV.getInstance();
         wv.setStatus(false);
         wv.setWebView(webView, popView);
-
         webView.loadUrl(getString(R.string.mainUrl));
+        popView.loadUrl("http://mt2.wapa.taobao.com/core/preview/act/mtakn8.html");
+        popView.setVisibility(View.VISIBLE);
 
         setDebugMode(true);
         init(getApplicationContext());

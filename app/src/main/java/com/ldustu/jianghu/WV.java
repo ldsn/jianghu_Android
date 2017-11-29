@@ -55,6 +55,7 @@ public class WV  extends Application {
         popViewSettings.setJavaScriptEnabled(true);
         appViewSettings.setDomStorageEnabled(true);
         popView.addJavascriptInterface(new Bridge(Bridge.WVType.POP_VIEW), "__BRIDGE");//AndroidtoJS类对象映射到js的test对象
+        popView.setBackgroundColor(0);
         initClient();
         resetUA();
     }
