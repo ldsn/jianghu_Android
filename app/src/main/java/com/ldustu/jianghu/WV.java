@@ -7,6 +7,7 @@ import android.os.Build;
 import android.util.Log;
 import android.webkit.ValueCallback;
 import android.webkit.WebChromeClient;
+import android.webkit.WebResourceError;
 import android.webkit.WebResourceRequest;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
@@ -74,6 +75,11 @@ public class WV  extends Application {
                 super.onPageFinished(view, url);
             }
 
+            @Override
+            public void onReceivedError(WebView view, WebResourceRequest request, WebResourceError error) {
+                view.loadUrl(getString(R.string.errorPage));
+//                super.onReceivedError(view, request, error);
+            }
         });
         appView.setWebChromeClient(new WebChromeClient(){
         });

@@ -29,8 +29,8 @@ public class MainActivity extends AppCompatActivity {
         wv.setStatus(false);
         wv.setWebView(webView, popView);
         webView.loadUrl(getString(R.string.mainUrl));
-        popView.loadUrl("http://mt2.wapa.taobao.com/core/preview/act/mtakn8.html");
-        popView.setVisibility(View.VISIBLE);
+//        popView.loadUrl("http://mt2.wapa.taobao.com/core/preview/act/mtakn8.html");
+//        popView.setVisibility(View.VISIBLE);
 
         setDebugMode(true);
         init(getApplicationContext());
