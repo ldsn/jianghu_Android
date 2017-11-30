@@ -108,6 +108,18 @@ public class WV  extends Application {
             list.add(arg);
             messageList.add(list);
             return;
+        } else {
+            String script = "window.__receiveJHMessage('" + evt + "','" + arg + "')";
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+                appView.evaluateJavascript(script, new ValueCallback<String>() {
+                    @Override
+                    public void onReceiveValue(String s) {
+
+                    }
+                });
+            } else {
+                appView.loadUrl(script);
+            }
         }
     }
 }

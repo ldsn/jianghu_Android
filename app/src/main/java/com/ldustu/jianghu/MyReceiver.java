@@ -110,7 +110,7 @@ public class MyReceiver extends BroadcastReceiver{
         //i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP );
         context.startActivity(i);
-        WV.getInstance().sendMessage("message", message);
+        WV.getInstance().sendMessage("push", message);
     }
     public static boolean isBackground(Context context) {
         ActivityManager activityManager = (ActivityManager) context.getSystemService(Context.ACTIVITY_SERVICE);
