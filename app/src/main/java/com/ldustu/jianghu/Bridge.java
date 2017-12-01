@@ -50,11 +50,29 @@ public class Bridge extends Object {
             case "back":
                 back(wv);
                 break;
+            case "inited":
+                inited();
         }
     }
 
 
     private Handler handler = new Handler();
+
+
+    private void inited () {
+        final Runnable runnableUi = new Runnable() {
+            @Override
+            public void run() {
+                WV.getInstance().flushMessage();
+            }
+        };
+        new Thread() {
+            public void run() {
+                handler.post(runnableUi);
+            }
+        }.start();
+
+    }
 
     private void show() {
 

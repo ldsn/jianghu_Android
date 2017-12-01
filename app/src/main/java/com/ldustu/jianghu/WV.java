@@ -3,6 +3,8 @@ package com.ldustu.jianghu;
 import android.annotation.SuppressLint;
 import android.app.Application;
 import android.content.Context;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
 import android.os.Build;
 import android.util.Log;
 import android.webkit.ValueCallback;
@@ -63,21 +65,15 @@ public class WV  extends Application {
 
     private void initClient() {
         appView.setWebViewClient(new WebViewClient(){
+
             @Override
             public void onPageFinished(WebView view, String url) {
-                setStatus(true);
-                if (!messageList.isEmpty()) {
-                    for(List<String> s : messageList) {
-                        sendMessage(s.get(0), s.get(1));
-                    }
-                    messageList.clear();
-                }
                 super.onPageFinished(view, url);
             }
 
             @Override
             public void onReceivedError(WebView view, WebResourceRequest request, WebResourceError error) {
-                view.loadUrl(getString(R.string.errorPage));
+                view.loadUrl(view.getContext().getString(R.string.page));
 //                super.onReceivedError(view, request, error);
             }
         });
@@ -87,13 +83,31 @@ public class WV  extends Application {
         popView.setWebViewClient(new WebViewClient());
     }
 
+    public void flushMessage() {
+        setStatus(true);
+        if (!messageList.isEmpty()) {
+            for(List<String> s : messageList) {
+                sendMessage(s.get(0), s.get(1));
+            }
+            messageList.clear();
+        }
+    }
 
     private void resetUA () {
-        // 修改ua使得web端正确判断
+        String version;
+        try {
+            PackageInfo pInfo = appView.getContext().getPackageManager().getPackageInfo(appView.getContext().getPackageName(), 0);
+            version = pInfo.versionName;
+        } catch (PackageManager.NameNotFoundException e) {
+            e.printStackTrace();
+            version = "0.0.0";
+        }
+        Log.d(version,version);
+
         String ua = appView.getSettings().getUserAgentString();
-        appView.getSettings().setUserAgentString(ua+"; JH " + Info.version + " APP_VIEW " + "JH_Android");
+        appView.getSettings().setUserAgentString(ua+"; JH " + version + " APP_VIEW " + "JH_Android");
         ua = popView.getSettings().getUserAgentString();
-        popView.getSettings().setUserAgentString(ua+"; JH " + Info.version + " POP_VIEW " + "JH_Android");
+        popView.getSettings().setUserAgentString(ua+"; JH " + version + " POP_VIEW " + "JH_Android");
     }
     static WV getInstance() {
         if (instance == null) {

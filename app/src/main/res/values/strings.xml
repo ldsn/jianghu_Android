@@ -3,5 +3,5 @@
     <string name="mainUrl">http://jianghu.ldustu.com</string>
     <string name="version">0.0.1</string>
     <string name="a">file:///android_asset/aa.html</string>
-    <string name="errorPage">file:///android_asset/404.html</string>
+    <string name="page">file:///android_asset/404.html</string>
 </resources>

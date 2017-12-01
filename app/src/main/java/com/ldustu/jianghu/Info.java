@@ -5,5 +5,9 @@ package com.ldustu.jianghu;
  */
 
 public class Info {
+
+    static  {
+
+    }
     static String version = "0.0.1";
 }

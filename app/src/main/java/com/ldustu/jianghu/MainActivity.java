@@ -1,6 +1,9 @@
 package com.ldustu.jianghu;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Build;
+import android.provider.Settings;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -8,6 +11,7 @@ import android.view.View;
 import android.webkit.ValueCallback;
 import android.webkit.WebChromeClient;
 import android.webkit.WebView;
+import android.widget.Toast;
 
 import static cn.jpush.android.api.JPushInterface.init;
 import static cn.jpush.android.api.JPushInterface.setDebugMode;
@@ -31,6 +35,8 @@ public class MainActivity extends AppCompatActivity {
         webView.loadUrl(getString(R.string.mainUrl));
 //        popView.loadUrl("http://mt2.wapa.taobao.com/core/preview/act/mtakn8.html");
 //        popView.setVisibility(View.VISIBLE);
+
+//        webView.loadUrl("file:///android_asset/test.html");
 
         setDebugMode(true);
         init(getApplicationContext());
@@ -59,5 +65,6 @@ public class MainActivity extends AppCompatActivity {
             webView.loadUrl("javascript:alert(123)");
         }
     }
+
 }
 
